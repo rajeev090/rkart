@@ -1,0 +1,13 @@
+{% extends "blog/layout.html" %}
+{% block title %}Blog{% endblock title%}
+{% block body %}
+
+
+<h1>Hello, world! this my blog</h1>
+{% load static %}
+<a href="{%static 'blog/file1.txt' %}"> click me </a>
+<a href="http://127.0.0.1:8000/shop/"> <img src="{%static 'blog/solid.png' %}"> </a>
+<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi ipsam ratione maiores suscipit eius, optio
+    voluptates?
+</p>
+{% endblock body%}
