@@ -1,2 +1,5 @@
 logic.txt
 test.py
+*.pyc
+__pycache__/
+.vscode/

@@ -4,18 +4,29 @@ from math import ceil
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import logout, login
-from .models import Product
+from .models import Product, Contact
 # Create your views here.
 
 
 def index(request):
     products = Product.objects.all()
-    electronics = Product.objects.filter(catagory='electronics')
+    electronics = Product.objects.filter(category='electronics')
+    beauty = Product.objects.filter(category='beauty')
     n = len(products)
-    nslides = ceil(n/4)
-    params = {'product': products, 'cor_electro': electronics, 'range': range(
-        nslides), 'no_of_slides': nslides}
+    nslides = ceil(n/5)
+    # params = {'product': products, 'cor_electro': electronics, 'range': range(
+    #     nslides), 'no_of_slides': nslides}
+    allProds = [[products, range(nslides), nslides],
+                [electronics, range(nslides), nslides], [beauty, range(1, nslides), nslides]]
+    params = {'allProds': allProds}
     return render(request, 'shop/index.html', params)
+
+
+def messages(request):
+    message = Contact.objects.all()
+    #allmsg = [[message]]
+    params = {'msg': message}
+    return render(request, 'shop/messages.html', params)
 
 
 def about(request):
@@ -23,8 +34,16 @@ def about(request):
 
 
 def contact(request):
-    # return render(request, 'shop/contact.html')
-    return HttpResponse("Hello this is contact")
+    if request.method == "POST":
+        name = request.POST.get('name', '')
+        email = request.POST.get('email', '')
+        phone = request.POST.get('phone', '')
+        msgtype = request.POST.get('msgtype', '')
+        message = request.POST.get('message', '')
+        contact = Contact(name=name, email=email, phone=phone,
+                          msgtype=msgtype, message=message)
+        contact.save()
+    return render(request, 'shop/contact.html',)
 
 
 def tracker(request):
@@ -37,9 +56,12 @@ def checkout(request):
     return HttpResponse("Hello this is checkout")
 
 
-def productview(request):
+def productview(request, myid):
+
+    product = Product.objects.filter(product_id=myid)
+    return render(request, 'shop/productview.html', {'product': product[0]})
     # return render(request, 'shop/index.html')
-    return HttpResponse("Hello this is productview")
+    # return HttpResponse("Hello this is productview")
 
 
 def search(request):

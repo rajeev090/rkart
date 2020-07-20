@@ -1,5 +1,4 @@
 
-
 def cat():
     cat_list = [
         ('electronics', 'Electronics'),
@@ -11,7 +10,14 @@ def cat():
         ('clothing', 'Clothings & Accessories'),
         ('collectibles', 'Collectibles'),
         ('computer', 'Computer & Accessories'),
-        ('furniture', 'Furniture')
+        ('furniture', 'Furniture'),
+        ('garden', 'Garden & Outdoors'),
+        ('health', 'Health & Personal Care'),
+        ('home', 'Home & Kitchen'),
+        ('industrial', 'Industrial & Scientific'),
+        ('jewellery', 'Jewellery'),
+        ('luggage', 'Luggage & Bags'),
+        ('luxurybeauty', 'Luxury Beauty'),
     ]
     cat_list.sort(key=lambda x: x[0])
     return cat_list
@@ -31,7 +37,7 @@ def sub_cat():
         ('babyclothing', 'Baby Clothings'),
         ('babycare', 'Baby Care'),
         ('babytoys', 'Activity & toys'),
-        ('makeup', 'Makup'),
+        ('makeup', 'Makeup'),
         ('skincare', 'Skin Care'),
         ('haircare', 'Hair Care'),
         ('carparts', 'Car Parts & Accessories'),
@@ -49,3 +55,14 @@ def sub_cat():
     ]
     subcat_list.sort(key=lambda x: x[0])
     return subcat_list
+
+
+def tags():
+    tag_list = []
+    a = cat()
+    b = sub_cat()
+    for i in a:
+        tag_list.append(i)
+    for i in b:
+        tag_list.append(i)
+    return tag_list

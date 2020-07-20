@@ -25,41 +25,78 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">ekart-Mall</a>
+
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="/shop">rkart-Mall</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <form class="form-inline ml-5my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" id="navbarsearch" placeholder="Search" aria-label="Search"
-                style="width:630px !important;">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <div class="nav-bar-search ml-3" style="background-color: white; border-radius:.5rem">
 
+            <form class="form-inline my-2 my-lg-0">
+                <div class="dropdown">
+                    <a class="btn bg-warning my-2 my-sm-0 dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        All
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="#">Electronics</a>
+                        <a class="dropdown-item" href="#">Books</a>
+                        <a class="dropdown-item" href="#">Appliances</a>
+                        <a class="dropdown-item" href="#">Baby</a>
+                        <a class="dropdown-item" href="#">Beauty</a>
+                        <a class="dropdown-item" href="#">Car & Bikes</a>
+                        <a class="dropdown-item" href="#">Clothings & Accessories</a>
+                        <a class="dropdown-item" href="#">Collectibles</a>
+                        <a class="dropdown-item" href="#">Computer & Accessories</a>
+                        <a class="dropdown-item" href="#">Furniture</a>
+                        <a class="dropdown-item" href="#">Garden & Outdoors</a>
+                        <a class="dropdown-item" href="#">Helth & Personal Care</a>
+                        <a class="dropdown-item" href="#">Home & Kitchen</a>
+                        <a class="dropdown-item" href="#">Industrial & Scientific</a>
+                        <a class="dropdown-item" href="#">Jewellery</a>
+                        <a class="dropdown-item" href="#">Luggage & Bags</a>
+                        <a class="dropdown-item" href="#">Luxury Beauty</a>
+                    </div>
+                </div>
+                <input class="form-control " type="search" id="navbarsearch" aria-label="Search"
+                    style="width:33rem !important; border: 1px solid #ffffff;">
+                <button class="btn bg-warning my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/shop">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">About Us</a>
+                    <a class="nav-link" href="/shop/about">About Us</a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Products
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
                         <a class="dropdown-item" href="#">Brick</a>
                         <a class="dropdown-item" href="#">Cone</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Cup</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact Us</a>
-                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Cart(<span id='cart'>0</span>) </a>
+                </li> -->
+                <button type="button" id="cart-pop" class="btn btn-dark bg-dark mx-2" data-html="true"
+                    data-container="body" data-toggle="popover" data-placement="bottom">
+                    <div id='cart-btn my-0' style="font-size:.8rem;">
+                        🛒Cart (<span id='cart'>0</span>)<br>
+                        <div id='cart-btn-txt ' style="font-size: .5rem;">click to view items</div>
+                    </div>
+                </button>
             </ul>
 
         </div>
@@ -97,6 +134,81 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+    <script>
+
+
+        // Find out the cart items from local storage
+
+        if (localStorage.getItem('cart') == null) {
+            var cart = {};
+        }
+        else {
+            cart = JSON.parse(localStorage.getItem('cart'));
+            document.getElementById('cart').innerHTML = Object.keys(cart).length;
+            updateCart(cart)
+        }
+
+        // if the ad to cart button is clicked, add/ increment the item
+
+        $('.cart').click(function () {
+            console.log('clicked');
+            var idstr = this.id.toString();
+            if (cart[idstr] != undefined) {
+                cart[idstr] = cart[idstr] + 1;
+            }
+            else {
+                cart[idstr] = 1;
+            }
+            updateCart(cart)
+            console.log(cart);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById('cart').innerHTML = Object.keys(cart).length;
+        });
+
+        // add Popover to cart
+        $('#cart-pop').popover();
+        updatePopover(cart);
+        function updatePopover() {
+            var popStr = "";
+            popStr = popStr + "<h5> Cart for your items in my shopping cart</h5><div class='mx-2'";
+            var i = 1;
+            for (var item in cart) {
+                popStr = popStr + "<b>" + i + "<b>. ";
+                popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 20) + " | Qty: " + cart[item] + '<br>';
+                i = i + 1;
+            }
+            popStr = popStr + "</div>"
+            document.getElementById('cart-pop').setAttribute('data-content', popStr);
+            $('#cart-pop').popover('enable');
+        }
+
+        function updateCart(cart) {
+            for (var item in cart) {
+                document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+            } localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById('cart').innerHTML = Object.keys(cart).length;
+            console.log(cart);
+            updatePopover(cart);
+        }
+        // If plus or minus button is clicked, change the cart as well as the display value
+        $('.divpr').on("click", "button.minus", function () {
+            a = this.id.slice(7,);
+            cart['pr' + a] = cart['pr' + a] - 1;
+            cart['pr' + a] = Math.max(0, cart['pr' + a]);
+            document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+            updateCart(cart);
+        });
+        $('.divpr').on("click", "button.plus", function () {
+            a = this.id.slice(6,);
+            cart['pr' + a] = cart['pr' + a] + 1;
+            document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+            updateCart(cart);
+        });
+    </script>
+
+
+    {% block js %} {% endblock js %}
+
 
 </body>
 
