@@ -37,3 +37,26 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Order(models.Model):
+    order_id = models.AutoField(primary_key=True)
+    items_json = models.CharField(max_length=5000)
+    name = models.CharField(max_length=50, default="",)
+    email = models.CharField(max_length=50, default="",)
+    phone = models.CharField(max_length=15, default="",)
+    address = models.CharField(max_length=200, default="",)
+    city = models.CharField(max_length=50, default="")
+    state = models.CharField(max_length=50, default="")
+    zip_code = models.CharField(max_length=50, default="")
+    date = models.DateTimeField(default=timezone.now)
+
+
+class OrderUpdate(models.Model):
+    update_id = models.AutoField(primary_key=True)
+    order_id = models.IntegerField(default="")
+    update_desc = models.CharField(max_length=5000, default="")
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.update_desc[0:7] + "..."
