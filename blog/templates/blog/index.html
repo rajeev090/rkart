@@ -1,13 +1,33 @@
 {% extends "blog/layout.html" %}
-{% block title %}Blog{% endblock title%}
+{% block title %}Blogpost{% endblock title%}
 {% block body %}
+<div class="container my-5">
+    <div class="row my-2">
+        {% for item in rev_blog %}
+        <div class="col-md-6">
+            <div
+                class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary"></strong>
+                    <h3 class="mb-0">{{item.title}}</h3>
+                    <div class="mb-1 text-muted">{{item.pub_date}}</div>
+                    <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to
+                        additional content.</p>
+                    <a href="blogpost/{{item.post_id}}" class="stretched-link">Continue reading</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img class="bd-placeholder-img" width="200" height="250" src="/media/{{item.thumbnail}}"
+                        preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+                        aria-label="Placeholder: Thumbnail">
+                    </img>
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:2 %}
+    </div>
+    <div class="row my-2">
+        {% endif %}
+        {% endfor %}
+    </div>
 
-
-<h1>Hello, world! this my blog</h1>
-{% load static %}
-<a href="{%static 'blog/file1.txt' %}"> click me </a>
-<a href="http://127.0.0.1:8000/shop/"> <img src="{%static 'blog/solid.png' %}"> </a>
-<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi ipsam ratione maiores suscipit eius, optio
-    voluptates?
-</p>
-{% endblock body%}
+    {% endblock body%}

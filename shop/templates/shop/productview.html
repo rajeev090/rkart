@@ -1,0 +1,121 @@
+{% extends "shop/layout.html" %}
+{% block title %}{{product.product_name}}{% endblock title%}
+{% block css %} {% endblock css %}
+{% block body %}
+{% load static %}
+<style>
+    body {
+        background-color: rgb(233, 233, 233);
+    }
+
+    .col-md-3 {
+        display: inline-block;
+        margin-left: -4px;
+
+    }
+
+    .carousel-indicators .active {
+        background-color: blue;
+    }
+
+    .col-md-3 img {
+        width: 100%;
+        height: 100px;
+    }
+
+    .card-body {
+        text-overflow: ellipsis;
+        max-height: 110px;
+        min-height: 110px;
+        flex: none;
+        font-size: .8rem;
+        text-overflow: ellipsis;
+
+    }
+
+    .card-img-side {
+        width: 100%;
+        height: 450px;
+        object-fit: contain;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 100px;
+        object-fit: contain;
+    }
+
+    .carousel {
+        background-color: white;
+    }
+
+    body .carousel-indicator li {
+        background-color: blue;
+    }
+
+    body .carousel-indicators {
+        bottom: 0;
+    }
+
+    body .carousel-control-prev {
+        align-items: center;
+        justify-content: left;
+        width: 2%;
+    }
+
+    body .carousel-control-next {
+        align-items: center;
+        justify-content: right;
+        width: 2%;
+    }
+
+    body .carousel-control-prev-icon,
+    body .carousel-control-next-icon {
+        background-color: rgba(147, 176, 255, 0.815);
+        padding-top: 5rem;
+    }
+
+    /* body .carousel-control-prev-icon {
+        margin-left: 0;
+    } */
+
+    body .carousel-control-next-icon {
+        margin-right: 0;
+    }
+
+    body .no-padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    */
+</style>
+
+<div class="container-fluid mx-4 my-4">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="/media/{{product.image}}" class="card-img-side" alt="...">
+        </div>
+        <div class="col-md-6">
+            <h4 class="card-desc">{{product.product_name}}</h4>
+            <p>Brand:{{product.brand}}</p>
+            <div>
+                <h5 class="card-text">₹ {{product.price}} <button id="pr{{i.product_id}}"
+                        class="btn btn-sm btn-primary mx-2 my-1 cart">Add to
+                        Cart</button> <button id="pr{{i.product_id}}" class="btn btn-sm btn-primary mx-2 my-1 cart">Buy
+                        Now</button> </h5>
+                <p><b>Item Description:</b>
+                    {{product.desc}}</p>
+
+
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock body%}
