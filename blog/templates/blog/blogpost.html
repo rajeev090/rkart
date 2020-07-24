@@ -3,48 +3,31 @@
 {% block css %} {% endblock css %}
 {% block body %}
 {% load static %}
+
 <div class="container">
     <div class="row my-5">
         <div class="col-md-8 blog-main">
             <h3 class="pb-4 mb-4 font-italic border-bottom">
-                From the Firehose
+                {{post.title}}
             </h3>
-
             <div class="blog-post">
-                <h2 class="blog-post-title">Sample blog post</h2>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-
-                <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap.
-                    Basic
-                    typography, images, and code are all supported.</p>
-                <hr>
-                <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus.
-                    Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere
-                    consectetur
-                    est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-                <blockquote>
-                    <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare
-                        vel eu
-                        leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                </blockquote>
-                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet
-                    fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-                <h2>Heading</h2>
-                <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo
-                    luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac
-                    consectetur ac, vestibulum at eros.</p>
-                <h3>Sub-heading</h3>
-                <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                <pre><code>Example code block</code></pre>
-                <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce
-                    dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-
+                <p class="blog-post-meta">{{post.pub_date}} <a href="#">Mark</a></p>
+                <p>{{post.chead0}}</p>
+                <h2>{{post.head1}}</h2>
+                <p>{{post.chead1}}</p>
+                <h3>{{post.head2}}</h3>
+                <p>{{post.chead2}}
+                <div class="fb-like mb-4" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-width=""
+                    data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
             </div>
 
             <nav class="blog-pagination">
-                <a class="btn btn-outline-primary" href="#">Older</a>
+                <a class="btn btn-outline-primary" href="blogpost/{{item.post_id}}">Older</a>
                 <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
             </nav>
+            <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-numposts="5"
+                data-width="">
+            </div>
 
         </div><!-- /.blog-main -->
 

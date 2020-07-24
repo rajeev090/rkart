@@ -14,6 +14,7 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("login/", views.loginuser, name="login"),
     path("cart/", views.cart, name="cart"),
-    path("wishlist/", views.wishlist, name="wishlist")
+    path("wishlist/", views.wishlist, name="wishlist"),
+    path("handlerequest/", views.handlerequest, name="handlerequest")
     #path("logout/", views.logoutuser, name="logout")
 ]
