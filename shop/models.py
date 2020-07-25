@@ -50,14 +50,14 @@ class Order(models.Model):
     city = models.CharField(max_length=50, default="")
     state = models.CharField(max_length=50, default="")
     zip_code = models.CharField(max_length=50, default="")
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateTimeField(auto_now_add=True)
 
 
 class OrderUpdate(models.Model):
     update_id = models.AutoField(primary_key=True)
     order_id = models.IntegerField(default="")
     update_desc = models.CharField(max_length=5000, default="")
-    timestamp = models.DateTimeField(default=timezone.now)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.update_desc[0:7] + "..."
