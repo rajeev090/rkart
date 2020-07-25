@@ -27,17 +27,22 @@ def index(request):
     return render(request, 'shop/index.html', params)
 
 
+def searchMatch(query, item):
+    return False
+
+
 def search(request):
     query = request.GET.get('search')
     allprods = []
     catprods = Product.objects.values('category', 'id')
     cats = {item['catagory'] for item in catprods}
-    # for cat in cats:
+    for cat in cats:
+        prodtemp = Product.objects.filter(category=cat)
+        prod = [item for item in prodtemp if searchMatch(query, items)]
 
-    n = len(products)
-    nslides = ceil(n/5)
-    allProds = [  # [products, range(nslides), nslides],
-        [electronics, range(nslides), nslides], [beauty, range(1, nslides), nslides]]
+        n = len(products)
+        nslides = ceil(n/5)
+        allProds.append([products, range(nslides), nslides])
     params = {'allProds': allProds}
     return render(request, 'shop/index.html', params)
 
