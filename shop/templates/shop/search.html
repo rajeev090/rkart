@@ -196,14 +196,14 @@
     updatePopover(cart);
     function updatePopover() {
         var popStr = "";
-        popStr = popStr + "<h5> Cart for your items in my shopping cart</h5><div class='mx-2'>";
+        popStr = popStr + "<html><body><h5> Cart for your items in my shopping cart</h5><div class='mx-2'>";
         var i = 1;
         for (var item in cart) {
             popStr = popStr + "<b>" + i + "</b>. ";
             popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 20) + " | Qty: " + cart[item][0] + '<br>';
             i = i + 1;
         }
-        popStr = popStr + "</div> <div><a href='/shop/checkout'> <button class'btn btn-primary' id='checkout'>Checkout</button></a> <button class'btn btn-primary' onclick='clearCart()' id='clearCart'>Clear cart</button></div>"
+        popStr = popStr + "</div> <a href='/shop/checkout'> <button class'btn btn-primary' id='checkout'>Checkout</button></a> <button class'btn btn-primary' onclick='clearCart()' id='clearCart'>Clear cart</button></body></html>"
         document.getElementById('cart-pop').setAttribute('data-content', popStr);
         $('#cart-pop').popover();
 

@@ -27,6 +27,14 @@ def index(request):
     return render(request, 'shop/index.html', params)
 
 
+def searchMatch(query, item):
+    ''' return true only if query matches the item'''
+    if query in item.desc.lower() or query in item.product_name.lower() or query in item.category.lower():
+        return True
+    else:
+        False
+
+
 def search(request):
     query = request.GET.get('search')
     allprods = []
@@ -39,7 +47,7 @@ def search(request):
     allProds = [  # [products, range(nslides), nslides],
         [electronics, range(nslides), nslides], [beauty, range(1, nslides), nslides]]
     params = {'allProds': allProds}
-    return render(request, 'shop/index.html', params)
+    return render(request, 'shop/search.html', params)
 
 
 def messages(request):

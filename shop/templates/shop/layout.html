@@ -15,76 +15,56 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="/shop">rkart-Mall</a>
+    <style>
+        .nav-f-cont {
+            display: flex;
+            align-content: center;
+            height: 36px;
+            max-width: 550px;
+            width: 100%;
+        }
+    </style>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
+        <div style="min-width: 125px;"></div>
+        <a class="navbar-brand" href="/shop">Rkart-Mall</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="nav-bar-search ml-3" style="background-color: white; border-radius:.5rem">
+        <div style="display: flex; min-width: 300px; width: calc(100% - 700px);">
+            <form class="nav-f-cont" action="/shop/search" method="GET">
+                <div class="input-group mb-3">
 
-            <form class="form-inline my-2 my-lg-0">
-                <div class="dropdown">
-                    <a class="btn bg-warning my-2 my-sm-0 dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        All
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Electronics</a>
-                        <a class="dropdown-item" href="#">Books</a>
-                        <a class="dropdown-item" href="#">Appliances</a>
-                        <a class="dropdown-item" href="#">Baby</a>
-                        <a class="dropdown-item" href="#">Beauty</a>
-                        <a class="dropdown-item" href="#">Car & Bikes</a>
-                        <a class="dropdown-item" href="#">Clothings & Accessories</a>
-                        <a class="dropdown-item" href="#">Collectibles</a>
-                        <a class="dropdown-item" href="#">Computer & Accessories</a>
-                        <a class="dropdown-item" href="#">Furniture</a>
-                        <a class="dropdown-item" href="#">Garden & Outdoors</a>
-                        <a class="dropdown-item" href="#">Helth & Personal Care</a>
-                        <a class="dropdown-item" href="#">Home & Kitchen</a>
-                        <a class="dropdown-item" href="#">Industrial & Scientific</a>
-                        <a class="dropdown-item" href="#">Jewellery</a>
-                        <a class="dropdown-item" href="#">Luggage & Bags</a>
-                        <a class="dropdown-item" href="#">Luxury Beauty</a>
-                    </div>
+                    <input type="text" class="form-control" placeholder="Search your products">
+                    <button type="button" class="btn btn-warning">Action</button>
                 </div>
-                <input class="form-control " type="search" id="navbarsearch" aria-label="Search"
-                    style="width:33rem !important; border: 1px solid #ffffff;">
-                <button class="btn bg-warning my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/shop">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/shop/about">About Us</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/shop/tracker">Tracker</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/blog">Blog</a>
                 </li>
-                <li class="nav-item dropdown">
+                <!--<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Products
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                         <a class="dropdown-item" href="#">Brick</a>
                         <a class="dropdown-item" href="#">Cone</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Cup</a>
-                    </div>
+                    </div> -->
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Cart(<span id='cart'>0</span>) </a>
                 </li> -->
-                <button type="button" id="cart-pop" class="btn btn-dark bg-dark mx-2" data-trigger="click, hover"
+                <button type="button" id="cart-pop" class="btn btn-primary bg-primary mx-2" data-trigger="click, hover"
                     data-html="true" data-container="body" data-toggle="popover" data-placement="bottom">
                     <div id='cart-btn my-0' style="font-size:.8rem;">
                         🛒Cart (<span id='cart'>0</span>)<br>
